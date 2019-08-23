@@ -1,0 +1,26 @@
+{
+  "name": "battleship-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "serve": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milosvukadinovic/Battleship-javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/milosvukadinovic/Battleship-javascript/issues"
+  },
+  "homepage": "https://github.com/milosvukadinovic/Battleship-javascript#readme",
+  "devDependencies": {
+    "eslint": "^6.2.1",
+    "eslint-config-google": "^0.13.0",
+    "jest": "^24.9.0",
+    "webpack": "^4.39.2"
+  }
+}

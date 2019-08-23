@@ -1,0 +1,15 @@
+const ship = (name, length) => {
+  const body = new Array(length).fill(false, 0);
+  const hit = (x) => {
+    if (body[x] === false) {
+      body[x] = true;
+      return true;
+    }
+    return false;
+  };
+  const isSunk = () => body.every((part) => part === true);
+  return {
+    name, length, hit, isSunk,
+  };
+};
+module.exports = ship;
