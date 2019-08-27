@@ -24,6 +24,7 @@ const player = (name) => {
   };
   const computerAttack = () => {
     const randomMove = moves[Math.floor(Math.random() * moves.length)];
+    // remove the random move
     return attack(moves[randomMove]);
   };
   return {name, attack, computerAttack};

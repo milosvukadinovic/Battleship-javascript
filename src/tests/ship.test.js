@@ -12,26 +12,26 @@ test('Ship got hit', () => {
 });
 
 test('Cant attack same spot twice', () => {
-    const shippy = ship('Destroyer', 7);
+  const shippy = ship('Destroyer', 7);
   shippy.hit(1);
   expect(shippy.hit(1)).toBeFalsy();
 });
 
 test('Cant hit a spot outside of ship body', () => {
-    const shippy = ship('Destroyer', 7);
+  const shippy = ship('Destroyer', 7);
   expect(shippy.hit(8)).toBeFalsy();
 });
 
 test('Ship is sunk', () => {
-    const shippy = ship('Destroyer', 2);
-    shippy.hit(0);
-    shippy.hit(1);
-    expect(shippy.isSunk()).toBeTruthy();
+  const shippy = ship('Destroyer', 2);
+  shippy.hit(0);
+  shippy.hit(1);
+  expect(shippy.isSunk()).toBeTruthy();
 });
 
 test('Return false if ship is not yet destroyed', () => {
-    const shippy = ship('Destroyer', 7);
-    shippy.hit(0);
-    shippy.hit(1);
-    expect(shippy.isSunk()).toBeFalsy();
+  const shippy = ship('Destroyer', 7);
+  shippy.hit(0);
+  shippy.hit(1);
+  expect(shippy.isSunk()).toBeFalsy();
 });

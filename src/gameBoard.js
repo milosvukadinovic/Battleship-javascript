@@ -6,7 +6,6 @@ const gameBoard = () => {
 
   const findShip = (coor) => {
     if (board[coor]=='o') {
-      console.log('fuck');
       return false;
     } else {
       return [board[coor], coor];
@@ -73,9 +72,6 @@ const gameBoard = () => {
     } else {
       const shipId = shoot[0];
       const hitBox = shoot[1];
-      console.log(shipId);
-      console.log(fleet[0]);
-      console.log(fleet[shipId]);
       const x=fleet[shipId].pos.indexOf(hitBox);
       fleet[shipId].ship.hit(x);
       hits.push(coor);

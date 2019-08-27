@@ -1,4 +1,4 @@
-const ship = (name, length) => {
+const ship = (length) => {
   const body = new Array(length).fill(false, 0);
   const hit = (x) => {
     if (body[x] === false) {
@@ -9,7 +9,7 @@ const ship = (name, length) => {
   };
   const isSunk = () => body.every((part) => part === true);
   return {
-    name, length, hit, isSunk,
+    length, hit, isSunk,
   };
 };
 module.exports = ship;
