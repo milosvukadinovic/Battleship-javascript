@@ -1,3 +1,1 @@
-const battleShip = require('./game-loop');
-
-battleShip();
+const dom = require('./DOM');
