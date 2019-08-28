@@ -42,12 +42,17 @@ const gameLoop = () => {
     return false;
   };
 
-
+  // this will be the listener for computer board aka player attack. 
+  //Just send coordinates that get attacked here
+  // after everything is confirmed computer attacks
     const attackListener = () => {
       const computerBoard = document.getElementById(`computerBoard`);
       enemyBoard.onclick = (event) => {
-        const playerAttack = getPlayerAttack(event);
-        const validAttack = players[0].attack(playerAttack);
+        const validAttack = players[0].attack(event.id); // change event id to match argument
+        if (validAttack && !winner()) {
+          gameBoards[1].receiveAttack(validAttack);
+          compMove = players[1].randomMove();
+        }
         
     };
   }
