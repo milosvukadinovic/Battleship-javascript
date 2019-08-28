@@ -1,0 +1,20 @@
+#container {
+  background-color: red;
+}
+
+.grid-container {
+  display: inline-grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-template-rows: repeat(10, 50px);
+  box-sizing: border-box;
+}
+
+.grid-item {
+  height: 50px;
+  width: 50px;
+  border: solid 1px black;
+}
+
+.grid-item:hover {
+  background-color: gray;
+}

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "build": "webpack",
     "serve": "webpack --watch"
   },
   "repository": {
@@ -18,9 +19,11 @@
   },
   "homepage": "https://github.com/milosvukadinovic/Battleship-javascript#readme",
   "devDependencies": {
+    "css-loader": "^3.2.0",
     "eslint": "^6.2.1",
     "eslint-config-google": "^0.13.0",
     "jest": "^24.9.0",
+    "style-loader": "^1.0.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7"
   }

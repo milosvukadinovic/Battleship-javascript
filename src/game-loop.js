@@ -8,10 +8,12 @@ const dom = require('./DOM');
 
 
 const gameLoop = () => {
+
   const container = document.getElementById('container');
   const gameBoards = [gameBoard(), gameBoard()];
-  const board= dom.createGrid('milos');
-  container.appendChild(board);
+
+  // const board= dom.createGrid('milos');
+  // container.appendChild(board);
   // when start button gets pressed
   const startGame = () => {
     const player = player(document.getElementById('player-name').value);
@@ -24,7 +26,8 @@ const gameLoop = () => {
     for (let i = 2; i < 7; i += 1) {
       const ship=ship(i);
       const placement=gameBoards[1].randomPlacement(i);
-      const success = gameBoards[1].place(placement.coor, ship, placement.position);
+      const success = gameBoards[1].place(placement.coor, ship,
+          placement.position);
       if (!success) {
         return false;
       }
@@ -42,20 +45,18 @@ const gameLoop = () => {
     return false;
   };
 
-  // this will be the listener for computer board aka player attack. 
-  //Just send coordinates that get attacked here
-  // after everything is confirmed computer attacks
-    const attackListener = () => {
-      const computerBoard = document.getElementById(`computerBoard`);
-      enemyBoard.onclick = (event) => {
-        const validAttack = players[0].attack(event.id); // change event id to match argument
-        if (validAttack && !winner()) {
-          gameBoards[1].receiveAttack(validAttack);
-          compMove = players[1].randomMove();
-        }
-        
-    };
-  }
+
+//   const attackListener = () => {
+//     const computerBoard = document.getElementById(`computerBoard`);
+//     enemyBoard.onclick = (event) => {
+//       const validAttack = players[0].attack(event.id); // change event id to match argument
+//       if (validAttack && !winner()) {
+//         gameBoards[1].receiveAttack(validAttack);
+//         compMove = players[1].randomMove();
+//       }
+      
+//   };
+// }
 
   return {
     gameLoop, gameBoards, winner,
