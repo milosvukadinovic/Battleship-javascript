@@ -1,10 +1,15 @@
 import './stylesheets/styles.css';
 import shipsModal from './game-start';
 const dom = (() => {
+  // const mainContainer = document.getElementById('container');
+  const gameStartContainer = document.getElementById('game-start');
+  const grid = shipsModal();
+  // console.log(typeof grid);
+  gameStartContainer.appendChild(grid);
+
+
   const renderBoards = (players) => {
-    const container = document.getElementById('container');
     container.appendChild(shipsModal.gridBoard());
-    shipsModal.show();
   };
   console.log('Webpack is working from this side');
   return {renderBoards};
