@@ -19,7 +19,7 @@ const gameLoop = () => {
       const index=event.target.getAttribute('index');
       const array=coordinates[index].value.split('');
       const shipCoordinates= createCoordinates(array);
-      
+
       const ships=ship(6-index);
       const success = gameBoards[0].place(shipCoordinates, ships,
           position[index]);
@@ -101,28 +101,6 @@ const gameLoop = () => {
     }
     return false;
   };
-
-
-  //   const attackListener = () => {
-  //     const computerBoard = document.getElementById(`computerBoard`);
-  //     enemyBoard.onclick = (event) => {
-<<<<<<< HEAD
-  //       const validAttack = players[0].attack(event.id);
-  // change event id to match argument
-=======
-  //       const validAttack = players[0].attack(event.id); // change event id to match argument
->>>>>>> 0e48c4138734e3c9ce465ad969f27f9acd604a98
-  //       if (validAttack && !winner()) {
-  //         gameBoards[1].receiveAttack(validAttack);
-  //         compMove = players[1].randomMove();
-  //       }
-
-  //   };
-  // }
-<<<<<<< HEAD
-=======
-
->>>>>>> 0e48c4138734e3c9ce465ad969f27f9acd604a98
 
   return {
     gameLoop, gameBoards, winner,

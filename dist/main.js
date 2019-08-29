@@ -129,7 +129,7 @@ eval("\n\nvar stylesInDom = {};\n\nvar isOldIE = function isOldIE() {\n  var mem
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _stylesheets_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/styles.css */ \"./src/stylesheets/styles.css\");\n/* harmony import */ var _stylesheets_styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_stylesheets_styles_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _game_start__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./game-start */ \"./src/game-start.js\");\n\n\nconst dom = (() => {\n  // Part 1 Getting the info from the user basically settting the position of\n  // the boards\n  // const mainContainer = document.getElementById('container');\n  const gameStartContainer = document.getElementById('game-start');\n  const grid = Object(_game_start__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n\n  // console.log(typeof grid);\n  gameStartContainer.appendChild(grid);\n\n  const renderBoards = (players) => {\n    container.appendChild(_game_start__WEBPACK_IMPORTED_MODULE_1__[\"default\"].gridBoard());\n  };\n\n  // listeners area\n  document.getElementsByClassName('btn-start-game')[0]\n      .addEventListener('click', (e)=>{\n        const val = e.target.innerText;\n        console.log(val);\n      });\n  console.log('Webpack is working from this side');\n  return {renderBoards};\n})();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (dom);\n\n\n//# sourceURL=webpack:///./src/DOM.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _stylesheets_styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stylesheets/styles.css */ \"./src/stylesheets/styles.css\");\n/* harmony import */ var _stylesheets_styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_stylesheets_styles_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _grid_generator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./grid-generator */ \"./src/grid-generator.js\");\n\n\nconst dom = (() => {\n  // Part 1 Getting the info from the user basically settting the position of\n  // the boards\n  // const mainContainer = document.getElementById('container');\n  const gameStartContainer = document.getElementById('game-start');\n  const grid = Object(_grid_generator__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n\n  // console.log(typeof grid);\n  gameStartContainer.appendChild(grid);\n\n  const renderBoards = (players) => {\n    container.appendChild(grid);\n  };\n\n  // listeners area\n  document.getElementsByClassName('btn-start-game')[0]\n      .addEventListener('click', (e)=>{\n        const val = e.target.innerText;\n        console.log(val);\n      });\n  return {renderBoards};\n})();\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (dom);\n\n\n//# sourceURL=webpack:///./src/DOM.js?");
 
 /***/ }),
 
@@ -138,21 +138,32 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
   !*** ./src/game-loop.js ***!
   \**************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (109:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n|   //     const computerBoard = document.getElementById(`computerBoard`);\\n|   //     enemyBoard.onclick = (event) => {\\n> <<<<<<< HEAD\\n|   //       const validAttack = players[0].attack(event.id);\\n|   // change event id to match argument\");\n\n//# sourceURL=webpack:///./src/game-loop.js?");
+eval("const ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\");\nconst gameBoard = __webpack_require__(/*! ./gameBoard */ \"./src/gameBoard.js\");\nconst player = __webpack_require__(/*! ./player */ \"./src/player.js\");\nconst dom = __webpack_require__(/*! ./DOM */ \"./src/DOM.js\");\n// so the gameplay loop goes like this and should be followed.\n// Window opens with data ready to be entered(aka name and ships to be placed)\n// 1.boards are initialized and waits for ships to be placed.\n\n\nconst gameLoop = () => {\n  const container = document.getElementById('container');\n  const gameBoards = [gameBoard(), gameBoard()];\n  // adding listeners to coordinates\n  const setButtons = document.getElementsByClassName(`setButton`);\n  for (let i = 0; i < setButtons.length; i++) {\n    setButtons[i].onclick = (event) => {\n      const coordinates = document.getElementsByClassName(`ship-input`);\n      const position = document.getElementsByClassName(`position-input`);\n      const index=event.target.getAttribute('index');\n      const array=coordinates[index].value.split('');\n      const shipCoordinates= createCoordinates(array);\n\n      const ships=ship(6-index);\n      const success = gameBoards[0].place(shipCoordinates, ships,\n          position[index]);\n      if (!success) {\n        console.log('sfdsd');\n        return false;\n      }\n      console.log(ships);\n    };\n    // adding listeners to deleting ships coordinates\n    const removeButtons = document.getElementsByClassName(`removeButton`);\n    for (let i = 0; i < removeButtons.length; i++) {\n      removeButtons[i].onclick = (event) => {\n        const coordinates = document.getElementsByClassName(`ship-input`);\n        const index=event.target.getAttribute('index');\n        console.log(coordinates[index].value);\n      };\n    }\n  }\n\n  const createCoordinates = (array) => {\n    const number=parseInt(array[1], 10)\n    switch (array[0]) {\n      case 'A':\n        return number;\n      case 'B':\n        return (10+number);\n      case 'C':\n        return (20+number);\n      case 'D':\n        return (30+number);\n      case 'E':\n        return (40+number);\n      case 'F':\n        return (50+number);\n      case 'G':\n        return (60+number);\n      case 'H':\n        return (70+number);\n      case 'I':\n        return (80+number);\n      case 'J':\n        return (90+number);\n\n      default:\n      // code block\n    }\n  };\n\n  // const board= dom.createGrid('milos');\n  // container.appendChild(board);\n  // when start button gets pressed\n  const startGame = () => {\n    const player = player(document.getElementById('player-name').value);\n    // loop and put all ships into fleet. players one.\n    // creating ships does the player on button, you just fill.\n    // player\n\n\n    // computer\n    for (let i = 2; i < 7; i += 1) {\n      const ship=ship(i);\n      const placement=gameBoards[1].randomPlacement(i);\n      const success = gameBoards[1].place(placement.coor, ship,\n          placement.position);\n      if (!success) {\n        return false;\n      }\n    }\n  };\n\n\n  const winner = () => {\n    if (gameBoards[0].sunkFleet()) {\n      return players[1].name;\n    }\n    if (gameBoards[1].sunkFleet()) {\n      return players[0].name;\n    }\n    return false;\n  };\n\n  return {\n    gameLoop, gameBoards, winner,\n  };\n};\n\nmodule.exports = gameLoop;\n\n\n//# sourceURL=webpack:///./src/game-loop.js?");
 
 /***/ }),
 
-/***/ "./src/game-start.js":
-/*!***************************!*\
-  !*** ./src/game-start.js ***!
-  \***************************/
+/***/ "./src/gameBoard.js":
+/*!**************************!*\
+  !*** ./src/gameBoard.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("const gameBoard = () => {\n  const board = Array.from(Array(100).fill('o'));\n  const fleet = [];\n  const hits = [];\n  const misses = [];\n\n  const findShip = (coor) => {\n    if (board[coor]=='o') {\n      return false;\n    } else {\n      return [board[coor], coor];\n    }\n  };\n\n\n  const place = (coor, ship, position) => {\n    secret=(coor).toString(10).split('').map(function(t) {\n      return parseInt(t);\n    } );\n    // Here it checks if coordinates go out of range\n    if (coor > 99 || coor < 0) {\n      return false;\n    }\n    // Here it checks if it goes out of range depending on ship length\n    if (position== 'Horizon') {\n      if (secret[1]>9-ship.length) {\n        return false;\n      }\n    } else {\n      if (secret[0]>9-ship.length) {\n        return false;\n      }\n    }\n    // Here it should work as follows: Rush thro\n    // depending on position, check if everything is clear\n    for (let i = 0; i < ship.length; i += 1) {\n      if (position=='Vertical') {\n        if (board[coor+i*10]!='o') {\n          return false;\n        }\n      } else {\n        if (board[coor+i]!='o') {\n          return false;\n        }\n      }\n    }\n    // adding coordinates to fleet\n    const newFleetMem = {};\n    let mult=1;\n    if (position=='Vertical') {\n      mult=10;\n    } else {\n      mult=1;\n    }\n    newFleetMem.pos=[];\n    for (let i = 0; i < ship.length; i += 1) {\n      newFleetMem.pos.push(coor+(mult*i));\n    }\n    newFleetMem.ship = ship;\n    fleet.push(newFleetMem);\n    for (let i = 0; i < ship.length; i += 1) {\n      board[coor+(mult*i)]=fleet.length-1;\n    }\n    return true;\n  };\n\n\n  const receiveAttack = (coor) => {\n    const shoot = findShip(coor);\n    if (shoot === false) {\n      misses.push(coor);\n    } else {\n      const shipId = shoot[0];\n      const hitBox = shoot[1];\n      const x=fleet[shipId].pos.indexOf(hitBox);\n      fleet[shipId].ship.hit(x);\n      hits.push(coor);\n    }\n    return true;\n  };\n\n  const randomPlacement = (length) => {\n    const sideWays = Math.floor(Math.random() * 2);\n    if (sideWays === 0) {\n      const x = Math.floor(Math.random() * (10-length));\n      const y = Math.floor(Math.random() * 10);\n      return {coor: (1*y+x-1), position: 'Horizon'};\n    }\n    const x = Math.floor(Math.random() * 10);\n    const y = Math.floor(Math.random() * (10-length));\n    return {coor: (1*y+x-1), position: 'Vertical'};\n  };\n\n  const sunkFleet = () => fleet.every((\n      member)=> member.ship.isSunk() === true);\n\n  return {\n    fleet, hits, misses, place, receiveAttack, sunkFleet, randomPlacement,\n  };\n};\n\nmodule.exports = gameBoard;\n\n\n//# sourceURL=webpack:///./src/gameBoard.js?");
+
+/***/ }),
+
+/***/ "./src/grid-generator.js":
+/*!*******************************!*\
+  !*** ./src/grid-generator.js ***!
+  \*******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst shipsModal = () => {\n  const grid = document.createElement('div');\n  grid.classList.add('grid-container', 'hidden');\n\n  for (let i =0; i < 100; i++) {\n    const gridItem = document.createElement('div');\n    gridItem.classList.add('grid-item');\n    grid.appendChild(gridItem);\n  }\n  return grid;\n};\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (shipsModal);\n\n\n//# sourceURL=webpack:///./src/game-start.js?");
+eval("__webpack_require__.r(__webpack_exports__);\nconst gridNode = () => {\n  const grid = document.createElement('div');\n  grid.classList.add('grid-container', 'hidden');\n\n  for (let i =0; i < 100; i++) {\n    const gridItem = document.createElement('div');\n    gridItem.classList.add('grid-item');\n    grid.appendChild(gridItem);\n  }\n  return grid;\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (gridNode);\n\n\n//# sourceURL=webpack:///./src/grid-generator.js?");
 
 /***/ }),
 
@@ -164,6 +175,28 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst shipsModal = () => {\n 
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("const dom = __webpack_require__(/*! ./DOM */ \"./src/DOM.js\");\nconst gameloop=__webpack_require__(/*! ./game-loop */ \"./src/game-loop.js\");\ngameloop();\n\n\n//# sourceURL=webpack:///./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/player.js":
+/*!***********************!*\
+  !*** ./src/player.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("/*\nSo basically we have a board array which translates to dom,\nrange from 0-99 we split it so it looks 10x10\ni wanned it this way because of moves(moves is not 0, but is 100 and declines\n     from that, so its basically AVAILABLE MOVES) and random.\nIt isolates moves already made and randomises between empty ones.\n\nYou make a move by sending a coordinate from 0-99 depending on\nwhich button you press, it sends it to attack and checks\neverything on board, but registers it on player\n */\n\nconst player = (name) => {\n  let moves = Array.from(Array(100).keys());\n  const attack = (coordinates) => {\n    if (moves.includes(coordinates)) {\n      moves=moves.filter(function(e) {\n        return e !== coordinates;\n      });\n      return coordinates;\n    } else {\n      return false;\n    }\n  };\n  const computerAttack = () => {\n    const randomMove = moves[Math.floor(Math.random() * moves.length)];\n    // remove the random move\n    return attack(moves[randomMove]);\n  };\n  return {name, attack, computerAttack};\n};\n\nmodule.exports = player;\n\n\n//# sourceURL=webpack:///./src/player.js?");
+
+/***/ }),
+
+/***/ "./src/ship.js":
+/*!*********************!*\
+  !*** ./src/ship.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("const ship = (length) => {\n  const body = new Array(length).fill(false, 0);\n  const hit = (x) => {\n    if (body[x] === false) {\n      body[x] = true;\n      return true;\n    }\n    return false;\n  };\n  const isSunk = () => body.every((part) => part === true);\n  return {\n    length, hit, isSunk,\n  };\n};\nmodule.exports = ship;\n\n\n//# sourceURL=webpack:///./src/ship.js?");
 
 /***/ }),
 

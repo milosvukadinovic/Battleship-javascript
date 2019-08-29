@@ -1,4 +1,4 @@
-const shipsModal = () => {
+const gridNode = () => {
   const grid = document.createElement('div');
   grid.classList.add('grid-container', 'hidden');
 
@@ -10,5 +10,4 @@ const shipsModal = () => {
   return grid;
 };
 
-
-export default shipsModal;
+export default gridNode;

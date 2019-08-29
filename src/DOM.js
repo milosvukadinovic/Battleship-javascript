@@ -1,17 +1,17 @@
 import './stylesheets/styles.css';
-import shipsModal from './game-start';
+import gridNode from './grid-generator';
 const dom = (() => {
   // Part 1 Getting the info from the user basically settting the position of
   // the boards
   // const mainContainer = document.getElementById('container');
   const gameStartContainer = document.getElementById('game-start');
-  const grid = shipsModal();
+  const grid = gridNode();
 
   // console.log(typeof grid);
   gameStartContainer.appendChild(grid);
 
   const renderBoards = (players) => {
-    container.appendChild(shipsModal.gridBoard());
+    container.appendChild(grid);
   };
 
   // listeners area
@@ -20,7 +20,6 @@ const dom = (() => {
         const val = e.target.innerText;
         console.log(val);
       });
-  console.log('Webpack is working from this side');
   return {renderBoards};
 })();
 
