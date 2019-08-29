@@ -18,77 +18,54 @@ const gameLoop = () => {
       const array=coordinates[index].value.split('');
       const shipCoordinates= createCoordinates(array);
       const ships=ship(6-index);
+      removeShipFromFleet(ships.length);
+      
       const success = gameBoards[0].place(shipCoordinates, ships,
-          position[index].value);
-      if (!success) {
-        console.log('sfdsd');
-        return false;
-      }
-      addShipOnGrid(shipCoordinates, ships,
-          position[index].value);
+        position[index].value);
+    if (!success) {
+      return false;
+    }
+      refreshGrid();
     };
   }
   // Remove ship button, removes from board, fleet and calls for grid cleanup
   const removeButtons = document.getElementsByClassName(`removeButton`);
   for (let i = 0; i < removeButtons.length; i++) {
     removeButtons[i].onclick = (event) => {
-      const coordinates = document.getElementsByClassName(`ship-input`);
-      const position = document.getElementsByClassName(`position-input`);
       const index=event.target.getAttribute('data');
-      const array=coordinates[index].value.split('');
-      const shipCoordinates= createCoordinates(array);
-      const ships=ship(6-index);
-      for (let i=0; i<gameBoards[0].fleet.length; i++) {
-        if (gameBoards[0].fleet[i].ship.length==6-index) {
-          gameBoards[0].fleet.splice(i, 1);
-          removeShipOnGrid(shipCoordinates, ships,
-              position[index].value);
-          console.log('it works damnit');
-          let mult=1;
-          if (position[index]=='Vertical') {
-            mult=10;
-          } else {
-            mult=1;
-          }
-          console.log(gameBoards[0]);
-          for (let i = 0; i < ships.length; i += 1) {
-            gameBoards[0].board[shipCoordinates+(mult*i)]= 'o';
-          }
-          return true;
-        }
-      }
+      removeShipFromFleet(6-index);
+      refreshGrid();
     };
   }
 
+  const removeShipFromFleet =(shipLength) =>{
+    
+    for (let i=0; i<gameBoards[0].fleet.length; i++) {
+      if (gameBoards[0].fleet[i].ship.length==shipLength) {
+        for (let j = 0; j <= gameBoards[0].fleet[i].pos.length; j+= 1) {
+          gameBoards[0].board[gameBoards[0].fleet[i].pos[j]]= 'o';
+        }
+        gameBoards[0].fleet.splice(i, 1);
+        refreshGrid();
+        return true;
+      }
+      
+    }
+  }
+
   // Adds ship on grid
-  const addShipOnGrid = (coordinates, shipModel, position) => {
+  const refreshGrid = () => {
     const boardBoxes= document.getElementsByClassName('grid-item');
-    let coordinationVariable= coordinates;
-
-    for (let i=0; i<shipModel.length; i++) {
-      boardBoxes[coordinationVariable].style.background = 'red';
-      if (position=='Horizon') {
-        coordinationVariable=coordinationVariable+1;
-      } else {
-        coordinationVariable=coordinationVariable+10;
+    for (let i=0; i<gameBoards[0].board.length; i++) {
+      if(gameBoards[0].board[i]=='o'){
+        boardBoxes[i].style.background = null;
+      }else{
+        boardBoxes[i].style.background = 'red';
       }
     }
   };
 
-  // Removes ship from grid
-  const removeShipOnGrid = (coordinates, shipModel, position) => {
-    const boardBoxes= document.getElementsByClassName('grid-item');
-    let coordinationVariable= coordinates;
 
-    for (let i=0; i<shipModel.length; i++) {
-      boardBoxes[coordinationVariable].style.background = null;
-      if (position=='Horizon') {
-        coordinationVariable=coordinationVariable+1;
-      } else {
-        coordinationVariable=coordinationVariable+10;
-      }
-    }
-  };
 
   // Start game button, checks if fleet is full
   // should hide form, call for computer to generate his ships
@@ -107,7 +84,7 @@ const gameLoop = () => {
   // takes input coordinates and gives back actual number.
   const createCoordinates = (array) => {
     const number=parseInt(array[1], 10);
-    switch (array[0]) {
+    switch (array[0].toUpperCase()) {
       case 'A':
         return number;
       case 'B':
