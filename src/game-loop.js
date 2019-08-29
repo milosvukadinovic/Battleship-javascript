@@ -1,4 +1,4 @@
-const ship = require('./ship');
+ const ship = require('./ship');
 const gameBoard = require('./gameBoard');
 const player = require('./player');
 const dom = require('./DOM');
@@ -74,9 +74,10 @@ const gameLoop = () => {
   document.getElementsByClassName('btn-start-game')[0]
       .addEventListener('click', (e)=>{
         if (gameBoards[0].fleet.length==5) {
-          console.log('frig yes');
+          console.log('Fleet is set');
+          startGame();
         } else {
-          console.log('frig no');
+          console.log('Fleet IS NOT SET');
         }
       });
 
@@ -113,7 +114,10 @@ const gameLoop = () => {
 
   // should be called on start game button, still needs work
   const startGame = () => {
-    const player = player(document.getElementById('player-name').value);
+    document.getElementById('game-start').style.display = 'none';
+    document.getElementById('game-play').style.display = 'block';
+
+    const player = player('Player');
 
     for (let i = 2; i < 7; i += 1) {
       const ship=ship(i);
