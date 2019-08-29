@@ -1,5 +1,5 @@
 #container {
-  background-color: red;
+  background-color: dodgerblue;
 }
 
 .grid-container {
@@ -36,4 +36,9 @@
 
 .ship-input {
   width: 60px;
+}
+.btn-start-game {
+  height: 30px;
+  width: 100px;
+  font-size: 1rem;
 }

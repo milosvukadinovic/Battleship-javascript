@@ -15,16 +15,16 @@
           <div class="form-item">Action</div>
 
           <div class="form-item">Carrier</div>
-          <div class="form-item"><input type="text" class="ship-input"/></div>
+          <div class="form-item"><input type="text" data="carrier" class="ship-input"/></div>
           <div class="form-item">
-            <select>
+            <select data="carrier">
             <option value="h" >Horizontal</option>
             <option value="v" >Vertical</option>
             </select>
           </div>
           <div class="form-item">
-            <button>Set</button>
-            <button>Remove</button>
+            <button data="carrier" class="set-button">Set</button>
+            <button data="carrier" class="remove-buttond">Remove</button>
           </div>
 
           <div class="form-item">Battleship</div>
@@ -77,6 +77,9 @@
           <div class="form-item">
             <button>Set</button>
             <button>Remove</button>
+          </div>
+          <div class="form-item">
+            <button class="btn-start-game">Start Game</button>
           </div>
 
         </div>

@@ -46,17 +46,18 @@ const gameLoop = () => {
   };
 
 
-//   const attackListener = () => {
-//     const computerBoard = document.getElementById(`computerBoard`);
-//     enemyBoard.onclick = (event) => {
-//       const validAttack = players[0].attack(event.id); // change event id to match argument
-//       if (validAttack && !winner()) {
-//         gameBoards[1].receiveAttack(validAttack);
-//         compMove = players[1].randomMove();
-//       }
-      
-//   };
-// }
+  //   const attackListener = () => {
+  //     const computerBoard = document.getElementById(`computerBoard`);
+  //     enemyBoard.onclick = (event) => {
+  //       const validAttack = players[0].attack(event.id);
+  // change event id to match argument
+  //       if (validAttack && !winner()) {
+  //         gameBoards[1].receiveAttack(validAttack);
+  //         compMove = players[1].randomMove();
+  //       }
+
+  //   };
+  // }
 
   return {
     gameLoop, gameBoards, winner,
