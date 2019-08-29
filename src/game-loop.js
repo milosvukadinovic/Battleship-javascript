@@ -8,9 +8,66 @@ const dom = require('./DOM');
 
 
 const gameLoop = () => {
-
   const container = document.getElementById('container');
   const gameBoards = [gameBoard(), gameBoard()];
+  // adding listeners to coordinates
+  const setButtons = document.getElementsByClassName(`setButton`);
+  for (let i = 0; i < setButtons.length; i++) {
+    setButtons[i].onclick = (event) => {
+      const coordinates = document.getElementsByClassName(`ship-input`);
+      const position = document.getElementsByClassName(`position-input`);
+      const index=event.target.getAttribute('index');
+      const array=coordinates[index].value.split('');
+      const shipCoordinates= createCoordinates(array);
+      
+      const ships=ship(6-index);
+      const success = gameBoards[0].place(shipCoordinates, ships,
+          position[index]);
+      if (!success) {
+        console.log('sfdsd');
+        return false;
+      }
+      console.log(ships);
+    };
+    // adding listeners to deleting ships coordinates
+    const removeButtons = document.getElementsByClassName(`removeButton`);
+    for (let i = 0; i < removeButtons.length; i++) {
+      removeButtons[i].onclick = (event) => {
+        const coordinates = document.getElementsByClassName(`ship-input`);
+        const index=event.target.getAttribute('index');
+        console.log(coordinates[index].value);
+      };
+    }
+  }
+
+  const createCoordinates = (array) => {
+    const number=parseInt(array[1], 10)
+    switch (array[0]) {
+      case 'A':
+        return number;
+      case 'B':
+        return (10+number);
+      case 'C':
+        return (20+number);
+      case 'D':
+        return (30+number);
+      case 'E':
+        return (40+number);
+      case 'F':
+        return (50+number);
+      case 'G':
+        return (60+number);
+      case 'H':
+        return (70+number);
+      case 'I':
+        return (80+number);
+      case 'J':
+        return (90+number);
+
+      default:
+      // code block
+    }
+  };
 
   // const board= dom.createGrid('milos');
   // container.appendChild(board);
@@ -49,8 +106,12 @@ const gameLoop = () => {
   //   const attackListener = () => {
   //     const computerBoard = document.getElementById(`computerBoard`);
   //     enemyBoard.onclick = (event) => {
+<<<<<<< HEAD
   //       const validAttack = players[0].attack(event.id);
   // change event id to match argument
+=======
+  //       const validAttack = players[0].attack(event.id); // change event id to match argument
+>>>>>>> 0e48c4138734e3c9ce465ad969f27f9acd604a98
   //       if (validAttack && !winner()) {
   //         gameBoards[1].receiveAttack(validAttack);
   //         compMove = players[1].randomMove();
@@ -58,6 +119,10 @@ const gameLoop = () => {
 
   //   };
   // }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0e48c4138734e3c9ce465ad969f27f9acd604a98
 
   return {
     gameLoop, gameBoards, winner,

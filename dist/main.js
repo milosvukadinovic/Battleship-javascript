@@ -133,6 +133,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
 
 /***/ }),
 
+/***/ "./src/game-loop.js":
+/*!**************************!*\
+  !*** ./src/game-loop.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("throw new Error(\"Module parse failed: Unexpected token (109:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n|   //     const computerBoard = document.getElementById(`computerBoard`);\\n|   //     enemyBoard.onclick = (event) => {\\n> <<<<<<< HEAD\\n|   //       const validAttack = players[0].attack(event.id);\\n|   // change event id to match argument\");\n\n//# sourceURL=webpack:///./src/game-loop.js?");
+
+/***/ }),
+
 /***/ "./src/game-start.js":
 /*!***************************!*\
   !*** ./src/game-start.js ***!
@@ -152,7 +163,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst shipsModal = () => {\n 
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const dom = __webpack_require__(/*! ./DOM */ \"./src/DOM.js\");\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const dom = __webpack_require__(/*! ./DOM */ \"./src/DOM.js\");\nconst gameloop=__webpack_require__(/*! ./game-loop */ \"./src/game-loop.js\");\ngameloop();\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
