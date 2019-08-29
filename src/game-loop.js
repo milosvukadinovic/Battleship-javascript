@@ -1,4 +1,4 @@
-const ship = require('./ship');
+ const ship = require('./ship');
 const gameBoard = require('./gameBoard');
 const player = require('./player');
 const dom = require('./DOM');
