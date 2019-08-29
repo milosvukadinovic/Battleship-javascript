@@ -4,6 +4,8 @@ const gameBoard = () => {
   const hits = [];
   const misses = [];
 
+  // according to coordinates, returns
+  // ship if exists on those coordinates
   const findShip = (coor) => {
     if (board[coor]=='o') {
       return false;
@@ -64,7 +66,10 @@ const gameBoard = () => {
     return true;
   };
 
-
+  // You send an attack to oposing board, coordinates
+  // Adds miss if you miss
+  // Adds hit if you hitted
+  // And removes health of the ship
   const receiveAttack = (coor) => {
     const shoot = findShip(coor);
     if (shoot === false) {
@@ -79,23 +84,29 @@ const gameBoard = () => {
     return true;
   };
 
+  // This function takes ship's length and returns a
+  // RANDOM position to place it ( starting position, and horizon/vertical )
+
   const randomPlacement = (length) => {
     const sideWays = Math.floor(Math.random() * 2);
     if (sideWays === 0) {
       const x = Math.floor(Math.random() * (10-length));
       const y = Math.floor(Math.random() * 10);
-      return {coor: (1*y+x-1), position: 'Horizon'};
+      return {coor: (1*y+x), position: 'Horizon'};
     }
     const x = Math.floor(Math.random() * 10);
     const y = Math.floor(Math.random() * (10-length));
-    return {coor: (1*y+x-1), position: 'Vertical'};
+    return {coor: (10*y+x), position: 'Vertical'};
   };
 
+
+  // Function that checks if every ship in the fleet is sunk
+  // These are losing conditions
   const sunkFleet = () => fleet.every((
       member)=> member.ship.isSunk() === true);
 
   return {
-    fleet, hits, misses, place, receiveAttack, sunkFleet, randomPlacement,
+    fleet, hits, misses, place, receiveAttack, sunkFleet, randomPlacement, board,
   };
 };
 
