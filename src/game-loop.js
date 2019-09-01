@@ -1,11 +1,14 @@
+import './stylesheets/styles.css';
 const ship = require('./ship');
 const gameBoard = require('./gameBoard');
 const player = require('./player');
-const dom = require('./DOM');
+const dom = require('./dom');
 
 
 const gameLoop = () => {
   const gameBoards = [gameBoard(), gameBoard()];
+  console.log('hello');
+  dom.createGrid("playerBoard");
   const players=[];
   // Add ship button, adds to board, fleet and calls for grid colors
   const setButtons = document.getElementsByClassName(`setButton`);
@@ -67,14 +70,8 @@ const gameLoop = () => {
   //then computer attacks instantly, 
   // disable buttons that have been pressed
   const addListeners = () => {
-    const removeButtons = document.getElementsByClassName(`removeButton`);
-  for (let i = 0; i < removeButtons.length; i++) {
-    removeButtons[i].onclick = (event) => {
-      const index=event.target.getAttribute('data');
-      removeShipFromFleet(6-index);
-      refreshGrid();
-    };
-  }
+    
+    
   };
 
 
@@ -125,11 +122,10 @@ const gameLoop = () => {
 
   // should be called on start game button, still needs work
   const startGame = () => {
-    document.getElementById('game-start').style.display = 'none';
-    document.getElementById('game-play').style.display = 'block';
     // whats missing? just show the computer board, lock down your own
     // wait for attacks
-    dom.renderBoards();
+    dom.createGrid("computerBoard");
+    dom.hideForm();
     const playerHuman = player('Player');
     const PlayerComputer = player('Computer');
     players.push(playerHuman);
@@ -165,4 +161,4 @@ const gameLoop = () => {
   };
 };
 
-module.exports = gameLoop;
+export {gameLoop};

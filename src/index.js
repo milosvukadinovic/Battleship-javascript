@@ -1,3 +1,3 @@
-const dom = require('./DOM');
+const dom = require('./dom');
 const gameloop=require('./game-loop');
-gameloop();
+gameloop.gameLoop();
