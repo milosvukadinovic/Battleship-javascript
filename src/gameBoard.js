@@ -3,7 +3,6 @@ const gameBoard = () => {
   const fleet = [];
   const hits = [];
   const misses = [];
-
   // according to coordinates, returns
   // ship if exists on those coordinates
   const findShip = (coor) => {

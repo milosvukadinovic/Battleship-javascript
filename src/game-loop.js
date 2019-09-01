@@ -1,13 +1,12 @@
- const ship = require('./ship');
+const ship = require('./ship');
 const gameBoard = require('./gameBoard');
 const player = require('./player');
 const dom = require('./DOM');
 
 
 const gameLoop = () => {
-  const container = document.getElementById('container');
   const gameBoards = [gameBoard(), gameBoard()];
-
+  const players=[];
   // Add ship button, adds to board, fleet and calls for grid colors
   const setButtons = document.getElementsByClassName(`setButton`);
   for (let i = 0; i < setButtons.length; i++) {
@@ -19,12 +18,12 @@ const gameLoop = () => {
       const shipCoordinates= createCoordinates(array);
       const ships=ship(6-index);
       removeShipFromFleet(ships.length);
-      
+
       const success = gameBoards[0].place(shipCoordinates, ships,
-        position[index].value);
-    if (!success) {
-      return false;
-    }
+          position[index].value);
+      if (!success) {
+        return false;
+      }
       refreshGrid();
     };
   }
@@ -39,7 +38,6 @@ const gameLoop = () => {
   }
 
   const removeShipFromFleet =(shipLength) =>{
-    
     for (let i=0; i<gameBoards[0].fleet.length; i++) {
       if (gameBoards[0].fleet[i].ship.length==shipLength) {
         for (let j = 0; j <= gameBoards[0].fleet[i].pos.length; j+= 1) {
@@ -49,22 +47,35 @@ const gameLoop = () => {
         refreshGrid();
         return true;
       }
-      
     }
-  }
+  };
 
   // Adds ship on grid
   const refreshGrid = () => {
     const boardBoxes= document.getElementsByClassName('grid-item');
     for (let i=0; i<gameBoards[0].board.length; i++) {
-      if(gameBoards[0].board[i]=='o'){
+      if (gameBoards[0].board[i]=='o') {
         boardBoxes[i].style.background = null;
-      }else{
+      } else {
         boardBoxes[i].style.background = 'red';
       }
     }
   };
 
+  //adds listeners to board ( attack ones ) fuck only one board is attackable
+  //send coordinates to attack
+  //then computer attacks instantly, 
+  // disable buttons that have been pressed
+  const addListeners = () => {
+    const removeButtons = document.getElementsByClassName(`removeButton`);
+  for (let i = 0; i < removeButtons.length; i++) {
+    removeButtons[i].onclick = (event) => {
+      const index=event.target.getAttribute('data');
+      removeShipFromFleet(6-index);
+      refreshGrid();
+    };
+  }
+  };
 
 
   // Start game button, checks if fleet is full
@@ -116,17 +127,25 @@ const gameLoop = () => {
   const startGame = () => {
     document.getElementById('game-start').style.display = 'none';
     document.getElementById('game-play').style.display = 'block';
-
-    const player = player('Player');
-
+    // whats missing? just show the computer board, lock down your own
+    // wait for attacks
+    dom.renderBoards();
+    const playerHuman = player('Player');
+    const PlayerComputer = player('Computer');
+    players.push(playerHuman);
+    players.push(PlayerComputer);
     for (let i = 2; i < 7; i += 1) {
-      const ship=ship(i);
+      const shipCreate=ship(i);
       const placement=gameBoards[1].randomPlacement(i);
-      const success = gameBoards[1].place(placement.coor, ship,
+      const success = gameBoards[1].place(placement.coor, shipCreate,
           placement.position);
       if (!success) {
+        console.log('fuck');
         return false;
       }
+      dom.renderBoards();
+      addListeners();
+      return true;
     }
   };
 

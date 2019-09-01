@@ -10,7 +10,16 @@ const gridNode = () => {
     gridItem.setAttribute('data', i);
     grid.appendChild(gridItem);
   }
-  return grid;
+
+
+  const renderBoards = () => {
+    console.log('herooooo');
+    const startGame = document.getElementById('game-play');
+    const grid = gridNode();
+    startGame.appendChild(grid);
+  };
+
+  return grid, renderBoards;
 };
 
 export default gridNode;

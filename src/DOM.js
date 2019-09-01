@@ -5,8 +5,10 @@ const dom = (() => {
   const grid = gridNode();
   gameStartContainer.appendChild(grid);
 
-  const renderBoards = (players) => {
-    container.appendChild(grid);
+  const renderBoards = () => {
+    const startGame = document.getElementById('game-play');
+    const grid = gridNode();
+    startGame.appendChild(grid);
   };
 
 
