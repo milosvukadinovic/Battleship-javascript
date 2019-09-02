@@ -105,7 +105,8 @@ const gameBoard = () => {
       member)=> member.ship.isSunk() === true);
 
   return {
-    fleet, hits, misses, place, receiveAttack, sunkFleet, randomPlacement, board,
+    fleet, hits, misses, place, receiveAttack, sunkFleet, 
+    randomPlacement, board,
   };
 };
 

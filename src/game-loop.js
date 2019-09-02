@@ -7,9 +7,8 @@ const dom = require('./dom');
 
 const gameLoop = () => {
   const gameBoards = [gameBoard(), gameBoard()];
-  console.log('hello');
-  dom.createGrid("playerBoard");
-  const players=[];
+  dom.createGrid('playerBoard');
+  const players=[player('Player'), player('Computer')];
   // Add ship button, adds to board, fleet and calls for grid colors
   const setButtons = document.getElementsByClassName(`setButton`);
   for (let i = 0; i < setButtons.length; i++) {
@@ -55,7 +54,7 @@ const gameLoop = () => {
 
   // Adds ship on grid
   const refreshGrid = () => {
-    const boardBoxes= document.getElementsByClassName('grid-item');
+    const boardBoxes= document.getElementsByClassName('playerBoardItem');
     for (let i=0; i<gameBoards[0].board.length; i++) {
       if (gameBoards[0].board[i]=='o') {
         boardBoxes[i].style.background = null;
@@ -63,15 +62,54 @@ const gameLoop = () => {
         boardBoxes[i].style.background = 'red';
       }
     }
+    for (let i=0; i<gameBoards[0].misses.length; i++) {
+      boardBoxes[gameBoards[0].misses[i]].style.background = 'yellow';
+    }
+    for (let i=0; i<gameBoards[0].hits.length; i++) {
+      boardBoxes[gameBoards[0].hits[i]].style.background = 'green';
+    }
   };
 
-  //adds listeners to board ( attack ones ) fuck only one board is attackable
-  //send coordinates to attack
-  //then computer attacks instantly, 
+  const refreshGrids = () => {
+    const boardBoxes= document.getElementsByClassName('computerBoardItem');
+    for (let i=0; i<gameBoards[1].misses.length; i++) {
+      boardBoxes[gameBoards[1].misses[i]].style.background = 'yellow';
+    }
+    for (let i=0; i<gameBoards[1].hits.length; i++) {
+      boardBoxes[gameBoards[1].hits[i]].style.background = 'green';
+    }
+  };
+
+  // adds listeners to board ( attack ones ) fuck only one board is attackable
+  // send coordinates to attack
+  // then computer attacks instantly,
   // disable buttons that have been pressed
   const addListeners = () => {
-    
-    
+    const index = event.target.getAttribute('data');
+    // player attack
+    const playerMove = players[0].attack(index);
+    const recieve=gameBoards[1].receiveAttack(index);
+    const lose =gameBoards[1].sunkFleet();
+    // computer attack
+    const computerMove = players[1].computerAttack();
+    const recieveComputer=gameBoards[0].receiveAttack(computerMove);
+    const loseComputer =gameBoards[1].sunkFleet();
+    console.log('details of attack listener');
+    console.log(playerMove);
+    console.log(recieve);
+    console.log(lose);
+    console.log(computerMove);
+    console.log(recieveComputer);
+    console.log(loseComputer);
+    console.log('end of details');
+    if (lose==true) {
+      console.log('You lose buckko');
+    } else if(loseComputer== true) {
+      console.log('You win buckko');
+    }
+    refreshGrids();
+    refreshGrid();
+    event.target.removeEventListener('click', addListeners);
   };
 
 
@@ -124,25 +162,25 @@ const gameLoop = () => {
   const startGame = () => {
     // whats missing? just show the computer board, lock down your own
     // wait for attacks
-    dom.createGrid("computerBoard");
+    dom.createGrid('computerBoard');
     dom.hideForm();
-    const playerHuman = player('Player');
-    const PlayerComputer = player('Computer');
-    players.push(playerHuman);
-    players.push(PlayerComputer);
+    const boxes = document.getElementsByClassName('computerBoardItem');
+    for (const box of boxes) {
+      box.addEventListener('click', addListeners);
+    }
     for (let i = 2; i < 7; i += 1) {
       const shipCreate=ship(i);
       const placement=gameBoards[1].randomPlacement(i);
       const success = gameBoards[1].place(placement.coor, shipCreate,
           placement.position);
       if (!success) {
-        console.log('fuck');
+        console.log('Breaks at placing ships');
         return false;
       }
-      dom.renderBoards();
-      addListeners();
-      return true;
     }
+    console.log('Success at creating ships and pushing them to board');
+    console.log(gameBoards[1]);
+    return true;
   };
 
   // winning conditions
