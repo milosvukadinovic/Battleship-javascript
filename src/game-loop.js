@@ -9,7 +9,6 @@ const gameLoop = () => {
   const gameBoards = [gameBoard(), gameBoard()];
   dom.createGrid('playerBoard');
   const players=[player('Player'), player('Computer')];
-  // Add ship button, adds to board, fleet and calls for grid colors
   const setButtons = document.getElementsByClassName(`setButton`);
   for (let i = 0; i < setButtons.length; i++) {
     setButtons[i].onclick = (event) => {
@@ -29,7 +28,7 @@ const gameLoop = () => {
       refreshGrid();
     };
   }
-  // Remove ship button, removes from board, fleet and calls for grid cleanup
+  
   const removeButtons = document.getElementsByClassName(`removeButton`);
   for (let i = 0; i < removeButtons.length; i++) {
     removeButtons[i].onclick = (event) => {
@@ -52,7 +51,6 @@ const gameLoop = () => {
     }
   };
 
-  // Adds ship on grid
   const refreshGrid = () => {
     const boardBoxes= document.getElementsByClassName('playerBoardItem');
     for (let i=0; i<gameBoards[0].board.length; i++) {
@@ -80,28 +78,18 @@ const gameLoop = () => {
     }
   };
 
-  // adds listeners to board ( attack ones ) fuck only one board is attackable
-  // send coordinates to attack
-  // then computer attacks instantly,
-  // disable buttons that have been pressed
   const addListeners = () => {
     const index = event.target.getAttribute('data');
-    // player attack
     const playerMove = players[0].attack(index);
-    const recieve=gameBoards[1].receiveAttack(index);
-    const lose =gameBoards[1].sunkFleet();
-    // computer attack
+    
+    const recieve=gameBoards[1].receiveAttack(playerMove);
+    const lose =gameBoards[0].sunkFleet();
+    
+    
     const computerMove = players[1].computerAttack();
     const recieveComputer=gameBoards[0].receiveAttack(computerMove);
     const loseComputer =gameBoards[1].sunkFleet();
-    console.log('details of attack listener');
-    console.log(playerMove);
-    console.log(recieve);
-    console.log(lose);
-    console.log(computerMove);
-    console.log(recieveComputer);
-    console.log(loseComputer);
-    console.log('end of details');
+
     if (lose==true) {
       console.log('You lose buckko');
     } else if(loseComputer== true) {
@@ -112,12 +100,7 @@ const gameLoop = () => {
     event.target.removeEventListener('click', addListeners);
   };
 
-
-  // Start game button, checks if fleet is full
-  // should hide form, call for computer to generate his ships
-  // and pop up his board, start the game.
-
-  document.getElementsByClassName('btn-start-game')[0]
+document.getElementsByClassName('btn-start-game')[0]
       .addEventListener('click', (e)=>{
         if (gameBoards[0].fleet.length==5) {
           console.log('Fleet is set');
@@ -127,8 +110,6 @@ const gameLoop = () => {
         }
       });
 
-  // Function that takes E2 for example and returns 42
-  // takes input coordinates and gives back actual number.
   const createCoordinates = (array) => {
     const number=parseInt(array[1], 10);
     switch (array[0].toUpperCase()) {
@@ -154,14 +135,13 @@ const gameLoop = () => {
         return (90+number);
 
       default:
-      // code block
+      console.log("wrong input");
     }
   };
 
-  // should be called on start game button, still needs work
+  
   const startGame = () => {
-    // whats missing? just show the computer board, lock down your own
-    // wait for attacks
+    
     dom.createGrid('computerBoard');
     dom.hideForm();
     const boxes = document.getElementsByClassName('computerBoardItem');
@@ -174,16 +154,14 @@ const gameLoop = () => {
       const success = gameBoards[1].place(placement.coor, shipCreate,
           placement.position);
       if (!success) {
-        console.log('Breaks at placing ships');
-        return false;
+        i--;
       }
+      
     }
-    console.log('Success at creating ships and pushing them to board');
-    console.log(gameBoards[1]);
     return true;
   };
 
-  // winning conditions
+
   const winner = () => {
     if (gameBoards[0].sunkFleet()) {
       return players[1].name;
