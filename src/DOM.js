@@ -25,23 +25,16 @@ const dom = (() => {
   };
 
   const createGrid = (string) => {
-
+    const footercontainer= document.getElementById('footerID');
     const gameStartContainer = document.getElementById('game-start');
-    if(string =='computerBoard'){
-      const h1=document.createElement('h1');
+    if(string =='computerBoard') {
+      const header=document.getElementById('headerID');
       const button= document.createElement('button')
       button.classList.add("btn-start-game");
       button.setAttribute("onClick", "window.location.reload()");
       button.innerHTML='Reset game';
-      gameStartContainer.appendChild(button);
-      h1.innerText="Computer Board";
-      gameStartContainer.appendChild(h1);
-    }else{
-      const h1=document.createElement('h1');
-      h1.innerText="Player Board";
-      gameStartContainer.appendChild(h1);
-
-      
+      footercontainer.appendChild(button);
+      header.style.display= "block";
     }
     const grids = gridNode(string);
     gameStartContainer.appendChild(grids);

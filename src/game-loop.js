@@ -5,11 +5,13 @@ const player = require('./player');
 const dom = require('./dom');
 
 
+
 const gameLoop = () => {
   const gameBoards = [gameBoard(), gameBoard()];
   dom.createGrid('playerBoard');
   const players=[player('Player'), player('Computer')];
   const setButtons = document.getElementsByClassName(`setButton`);
+  window.alert("Hello and welcome to Battleship game! Start the game by typing the coordinates from A-J plus 0-9.");
   for (let i = 0; i < setButtons.length; i++) {
     setButtons[i].onclick = (event) => {
       const coordinates = document.getElementsByClassName(`ship-input`);
@@ -17,15 +19,18 @@ const gameLoop = () => {
       const index=event.target.getAttribute('data');
       const array=coordinates[index].value.split('');
       const shipCoordinates= createCoordinates(array);
-      const ships=ship(6-index);
-      removeShipFromFleet(ships.length);
-
-      const success = gameBoards[0].place(shipCoordinates, ships,
+      if(shipCoordinates != false){
+        const ships=ship(6-index);
+        removeShipFromFleet(ships.length);
+        const success = gameBoards[0].place(shipCoordinates, ships,
           position[index].value);
       if (!success) {
-        return false;
+        window.alert("Wrong coordinates!");
       }
       refreshGrid();
+      }
+      
+      
     };
   }
   
@@ -91,9 +96,17 @@ const gameLoop = () => {
     const loseComputer =gameBoards[1].sunkFleet();
 
     if (lose==true) {
-      console.log('You lose buckko');
+      const boxes = document.getElementsByClassName('computerBoardItem');
+      for (const box of boxes) {
+        box.removeEventListener('click', addListeners);
+      }
+      window.alert("You lose!");
     } else if(loseComputer== true) {
-      console.log('You win buckko');
+      const boxes = document.getElementsByClassName('computerBoardItem');
+      for (const box of boxes) {
+        box.removeEventListener('click', addListeners);
+      }
+      window.alert("You win, congratulations!");
     }
     refreshGrids();
     refreshGrid();
@@ -103,15 +116,18 @@ const gameLoop = () => {
 document.getElementsByClassName('btn-start-game')[0]
       .addEventListener('click', (e)=>{
         if (gameBoards[0].fleet.length==5) {
-          console.log('Fleet is set');
           startGame();
         } else {
-          console.log('Fleet IS NOT SET');
+          window.alert("You didn't place all your ships.")
         }
       });
 
   const createCoordinates = (array) => {
     const number=parseInt(array[1], 10);
+    if (array.length == 0) {
+      window.alert("Wrong input");
+      return false;
+    }
     switch (array[0].toUpperCase()) {
       case 'A':
         return number;
@@ -135,7 +151,8 @@ document.getElementsByClassName('btn-start-game')[0]
         return (90+number);
 
       default:
-      console.log("wrong input");
+        window.alert("Wrong input");
+        return false;
     }
   };
 
@@ -156,7 +173,6 @@ document.getElementsByClassName('btn-start-game')[0]
       if (!success) {
         i--;
       }
-      
     }
     return true;
   };
