@@ -8,7 +8,7 @@ const player = (name) => {
       });
       return coordinates;
     } else {
-      return coordinates;
+      return false;
     }
   };
   const computerAttack = () => {
