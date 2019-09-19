@@ -9,7 +9,7 @@ const ship = (length) => {
   };
   const isSunk = () => body.every((part) => part === true);
   return {
-    length, hit, isSunk, body
+    length, hit, isSunk, body,
   };
 };
 module.exports = ship;

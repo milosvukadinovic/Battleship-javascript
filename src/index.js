@@ -1,2 +1,3 @@
-const gameloop=require('./game-loop');
+const gameloop = require('./game-loop');
+
 gameloop.gameLoop();

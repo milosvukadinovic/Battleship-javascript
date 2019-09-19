@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/milosvukadinovic/Battleship-javascript#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
     "css-loader": "^3.2.0",
     "eslint": "^6.4.0",
     "eslint-config-airbnb-base": "^14.0.0",

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const player = require('../player');
 
 test('Player name', () => {

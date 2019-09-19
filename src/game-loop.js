@@ -1,32 +1,40 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable radix */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-alert */
 import './stylesheets/styles.css';
+
 const ship = require('./ship');
 const gameBoard = require('./gameBoard');
 const player = require('./player');
-const dom = require('./dom');
+const dom = require('./DOM');
 
 const gameLoop = () => {
   const gameBoards = [gameBoard(), gameBoard()];
   dom.createGrid('playerBoard');
   const players = [player('Player'), player('Computer')];
-  const setButtons = document.getElementsByClassName(`setButton`);
+  const setButtons = document.getElementsByClassName('setButton');
   window.alert(
-      'Hello and welcome to Battleship game! Start' +
-       'the game by typing the coordinates from A-J plus 0-9.'
+    'Hello and welcome to Battleship game! Start'
+       + 'the game by typing the coordinates from A-J plus 0-9.',
   );
   for (let i = 0; i < setButtons.length; i++) {
     setButtons[i].onclick = (event) => {
-      const coordinates = document.getElementsByClassName(`ship-input`);
-      const position = document.getElementsByClassName(`position-input`);
+      const coordinates = document.getElementsByClassName('ship-input');
+      const position = document.getElementsByClassName('position-input');
       const index = event.target.getAttribute('data');
       const array = coordinates[index].value.split('');
       const shipCoordinates = createCoordinates(array);
-      if (shipCoordinates != false) {
+      if (shipCoordinates !== false) {
         const ships = ship(6 - index);
         removeShipFromFleet(ships.length);
         const success = gameBoards[0].place(
-            shipCoordinates,
-            ships,
-            position[index].value
+          shipCoordinates,
+          ships,
+          position[index].value,
         );
         if (!success) {
           window.alert('Wrong coordinates!');
@@ -36,7 +44,7 @@ const gameLoop = () => {
     };
   }
 
-  const removeButtons = document.getElementsByClassName(`removeButton`);
+  const removeButtons = document.getElementsByClassName('removeButton');
   for (let i = 0; i < removeButtons.length; i++) {
     removeButtons[i].onclick = (event) => {
       const index = event.target.getAttribute('data');
@@ -47,7 +55,7 @@ const gameLoop = () => {
 
   const removeShipFromFleet = (shipLength) => {
     for (let i = 0; i < gameBoards[0].fleet.length; i++) {
-      if (gameBoards[0].fleet[i].ship.length == shipLength) {
+      if (gameBoards[0].fleet[i].ship.length === shipLength) {
         for (let j = 0; j <= gameBoards[0].fleet[i].pos.length; j += 1) {
           gameBoards[0].board[gameBoards[0].fleet[i].pos[j]] = 'o';
         }
@@ -56,12 +64,13 @@ const gameLoop = () => {
         return true;
       }
     }
+    return false;
   };
 
   const refreshGrid = () => {
     const boardBoxes = document.getElementsByClassName('playerBoardItem');
     for (let i = 0; i < gameBoards[0].board.length; i++) {
-      if (gameBoards[0].board[i] == 'o') {
+      if (gameBoards[0].board[i] === 'o') {
         boardBoxes[i].style.background = null;
       } else {
         boardBoxes[i].style.background = 'red';
@@ -88,27 +97,25 @@ const gameLoop = () => {
   const addListeners = () => {
     const index = event.target.getAttribute('data');
     const playerMove = players[0].attack(parseInt(index));
-    console.log(index);
-    console.log(playerMove);
     const recieve = gameBoards[1].receiveAttack(playerMove);
     const loseComputer = gameBoards[1].sunkFleet();
-    if (loseComputer == true) {
+    if (loseComputer === true) {
       window.alert('You win, congratulations!');
       const boxes = document.getElementsByClassName('computerBoardItem');
       for (const box of boxes) {
         box.removeEventListener('click', addListeners);
       }
     }
-    if (recieve!=true) {
-      const computerMove = players[1].computerAttack();
+    if (recieve !== true) {
+      let computerMove = players[1].computerAttack();
       let recieveComputer = gameBoards[0].receiveAttack(computerMove);
-      while (recieveComputer==true) {
-        const computerMove = players[1].computerAttack();
+      while (recieveComputer === true) {
+        computerMove = players[1].computerAttack();
         recieveComputer = gameBoards[0].receiveAttack(computerMove);
         const lose = gameBoards[0].sunkFleet();
-        if (lose == true) {
+        if (lose === true) {
           window.alert('You lose!');
-          recieveComputer=false;
+          recieveComputer = false;
           const boxes = document.getElementsByClassName('computerBoardItem');
           for (const box of boxes) {
             box.removeEventListener('click', addListeners);
@@ -116,7 +123,7 @@ const gameLoop = () => {
         }
       }
       const lose = gameBoards[0].sunkFleet();
-      if (lose == true) {
+      if (lose === true) {
         window.alert('You lose!');
         const boxes = document.getElementsByClassName('computerBoardItem');
         for (const box of boxes) {
@@ -130,18 +137,18 @@ const gameLoop = () => {
   };
 
   document
-      .getElementsByClassName('btn-start-game')[0]
-      .addEventListener('click', (e) => {
-        if (gameBoards[0].fleet.length == 5) {
-          startGame();
-        } else {
-          window.alert('You didn\'t place all your ships.');
-        }
-      });
+    .getElementsByClassName('btn-start-game')[0]
+    .addEventListener('click', () => {
+      if (gameBoards[0].fleet.length === 5) {
+        startGame();
+      } else {
+        window.alert('You didn\'t place all your ships.');
+      }
+    });
 
   const createCoordinates = (array) => {
     const number = parseInt(array[1], 10);
-    if (array.length == 0) {
+    if (array.length === 0) {
       window.alert('Wrong input');
       return false;
     }
@@ -184,9 +191,9 @@ const gameLoop = () => {
       const shipCreate = ship(i);
       const placement = gameBoards[1].randomPlacement(i);
       const success = gameBoards[1].place(
-          placement.coor,
-          shipCreate,
-          placement.position
+        placement.coor,
+        shipCreate,
+        placement.position,
       );
       if (!success) {
         i--;
@@ -212,4 +219,4 @@ const gameLoop = () => {
   };
 };
 
-export {gameLoop};
+export { gameLoop };
