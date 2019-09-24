@@ -185,8 +185,7 @@ const gameLoop = () => {
       const success = gameBoards[1].place(
         placement.coor,
         shipCreate,
-        placement.position,
-      );
+        placement.position,);
       if (!success) {
         i--;
       }
@@ -207,8 +206,7 @@ const gameLoop = () => {
   return {
     gameLoop,
     gameBoards,
-    winner,
-  };
+    winner,};
 };
 
 export { gameLoop };
