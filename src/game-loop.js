@@ -27,8 +27,7 @@ const gameLoop = () => {
         const success = gameBoards[0].place(
           shipCoordinates,
           ships,
-          position[index].value,
-        );
+          position[index].value,);
         if (!success) {
           window.alert('Wrong coordinates!');
         }
