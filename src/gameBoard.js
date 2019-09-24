@@ -1,4 +1,4 @@
-/* eslint-disable radix */
+/* eslint-disable */
 const gameBoard = () => {
   const board = Array.from(Array(100).fill('o'));
   const fleet = [];

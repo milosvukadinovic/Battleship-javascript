@@ -1,3 +1,4 @@
+/* eslint-disable */
 const ship = (length) => {
   const body = new Array(length).fill(false, 0);
   const hit = (x) => {

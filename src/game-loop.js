@@ -1,10 +1,4 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable radix */
-/* eslint-disable no-plusplus */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-alert */
+/* eslint-disable */
 import './stylesheets/styles.css';
 
 const ship = require('./ship');

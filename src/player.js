@@ -1,4 +1,4 @@
-
+/* eslint-disable */
 const player = (name) => {
   let moves = Array.from(Array(100).keys());
   const attack = (coordinates) => {

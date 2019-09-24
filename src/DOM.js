@@ -1,4 +1,4 @@
-/* eslint-disable no-plusplus */
+/* eslint-disable */
 
 const dom = (() => {
   const gridNode = (string) => {
