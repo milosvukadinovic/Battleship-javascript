@@ -36,6 +36,7 @@
     "webpack-cli": "^3.3.7"
   },
   "dependencies": {
+    "babel-eslint": "^10.0.3",
     "image-webpack-loader": "^6.0.0"
   }
 }
