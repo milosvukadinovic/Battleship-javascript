@@ -13,8 +13,7 @@ const gameLoop = () => {
   const setButtons = document.getElementsByClassName('setButton');
   window.alert(
     'Hello and welcome to Battleship game! Start'
-       + 'the game by typing the coordinates from A-J plus 0-9.',
-  );
+       + 'the game by typing the coordinates from A-J plus 0-9.',);
   for (let i = 0; i < setButtons.length; i++) {
     setButtons[i].onclick = (event) => {
       const coordinates = document.getElementsByClassName('ship-input');
