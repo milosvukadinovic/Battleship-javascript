@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "babel-eslint": "^10.0.3",
+    "express": "^4.17.1",
     "image-webpack-loader": "^6.0.0"
   }
 }
