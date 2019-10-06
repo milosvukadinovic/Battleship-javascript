@@ -102,3 +102,32 @@ footer {
   padding-right:150px;
   display: inline;
 }
+@media only screen and (max-width: 1135px) {
+  .headerText2{
+    display:none;
+  }
+ #playerBoard{
+   float:left;
+   text-align: center;
+   margin-left: 55px;
+ }
+ .form-container{
+  margin-left: 90px!important;
+ }
+ #colorMeaning{
+  float: left;
+  text-align: center;
+  position:relative;
+  margin-bottom:15px;
+ }
+ footer{
+   float:left;
+   position:relative;
+ }
+ #footerID{
+  padding-bottom:10px;
+ }
+ #computerBoard{
+  margin-left: 50px;
+ }
+}
