@@ -76,11 +76,10 @@ footer {
     display: block;
     width: 100%;
     float: right;
-    padding: 20px;
     right: 10px;
     bottom: 0;
     position: absolute;
-    text-align: right;
+    text-align: center;
 }
 #headerID {
   display:none;
