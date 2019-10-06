@@ -76,7 +76,6 @@ footer {
     display: block;
     width: 100%;
     float: right;
-    right: 10px;
     bottom: 0;
     position: absolute;
     text-align: center;
@@ -105,16 +104,20 @@ footer {
   .headerText2{
     display:none;
   }
+  body{
+    text-align: center;
+  }
  #playerBoard{
-   float:left;
+   float:none;
    text-align: center;
    margin-left: 55px;
  }
  .form-container{
-  margin-left: 90px!important;
+  margin: 0px 0px 30px 0px!important;
+  float:none;
  }
  #colorMeaning{
-  float: left;
+  float: none;
   text-align: center;
   position:relative;
   margin-bottom:15px;
