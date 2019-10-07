@@ -1,4 +1,4 @@
-# Battleship project [@LIVE](https://battleship-milos.herokuapp.com/) 
+# Battleship project [LIVE](https://battleship-milos.herokuapp.com/) 
 
 Battlesiph game made with Javascript.
 
