@@ -2,6 +2,8 @@
 
 Battlesiph game made with Javascript.
 
+![Alt text](/src/stylesheets/ss.jpg)
+
 ## How to play:
 * Place your ships by coordinates
 * Attack the enemy board
