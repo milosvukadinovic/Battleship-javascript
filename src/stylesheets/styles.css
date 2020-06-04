@@ -77,12 +77,13 @@ footer {
     width: 100%;
     float: right;
     padding: 20px;
-    right: 10px;
+    right: 100px;
     bottom: 0;
     position: absolute;
     text-align: right;
 }
 #headerID {
+  text-align: left;
   display:none;
   top: 0;
   left: 0;
@@ -93,12 +94,17 @@ footer {
   -webkit-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
   box-shadow: 0 7px 8px rgba(0, 0, 0, 0.12);
-  text-align: center;
+  text-align: left;
 }
 
 .headerText {
   text-align: center;
-  padding-left:150px;
-  padding-right:150px;
+  padding-left:170px;
+  display: inline;
+}
+
+.headerText2 {
+  text-align: center;
+  padding-left:730px;
   display: inline;
 }
